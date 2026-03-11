@@ -12,7 +12,7 @@ function Content() {
     setCount(count - 1);
   };
   const fetchProducts = async () => {
-    const url = "https://backend-app-2-lfsh.onrender.com/store";
+    const url = `${API_URL}/store`;
     const res = await axios.get(url);
     setProducts(res.data);
   };
@@ -30,12 +30,11 @@ function Content() {
         {products.map((product) => (
           <div className="products">
             <ul>
-              <li><img src={`https://backend-app-2-lfsh.onrender.com/${product.image}`} alt={product.name} /></li>
+              <li><img src={`${API_URL}/${product.image}`} alt={product.name} /></li>
               <li>Product : {product.name}</li>
               <li>Price : {product.price}</li>
               <li>Description : {product.desc}</li>
             </ul>
-            <hr/>
           </div>
         ))}
     </div>
