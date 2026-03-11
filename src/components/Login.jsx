@@ -3,8 +3,8 @@ function Login() {
         <div className="login">
             <h1>Login</h1>
             <form>
-                <input type="email" placeholder="Email" />
-                <input type="password" placeholder="Password" />
+                <input type="email" placeholder="Email" /><br />
+                <input type="password" placeholder="Password" /><br />
                 <button type="submit">Login</button>
             </form>
         </div>
