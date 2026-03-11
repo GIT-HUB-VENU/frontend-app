@@ -7,7 +7,7 @@ function Login() {
                 <input type="password" placeholder="Password" /><br />
                 <button type="submit">Login</button>
             </form>
-            <p><Link to="/register">New User? Register here</Link></p>
+             <p><Link to="/register">New user register here</Link></p>
         </div>
     );
 }
