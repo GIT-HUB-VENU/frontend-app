@@ -5,11 +5,11 @@ function Header(){
       <h1>Header</h1>
       <nav>
         <ul>
-            <li>Home</li>
-            <li>Carts</li>
-            <li>Orders</li>
-            <li>login</li>
-            <li>logout</li>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/cart">Carts</Link></li>
+            <li><Link to="/orders">Orders</Link></li>
+            <li><Link to="/login">login</Link></li>
+            <li><Link to="/logout">logout</Link></li>
         </ul>
       </nav>
     </div>
