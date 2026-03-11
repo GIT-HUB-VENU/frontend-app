@@ -1,0 +1,10 @@
+.products{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    margin: 10px;
+    background-color: rgb(172, 216, 216);
+    color : rgb(86, 105, 128);
+}
