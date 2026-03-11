@@ -20,16 +20,6 @@ function App() {
           <Route path="orders" element={<Orders />} />
         </Routes>
       </BrowserRouter>
-      <Footer />
-
-
-      <Register />
-
-      <Cart />
-
-      <Orders />
-
-      <Footer />
     </div>
   );
 }
