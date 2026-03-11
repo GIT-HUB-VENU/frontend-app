@@ -1,6 +1,6 @@
 function Login() {
     return (
-        <div className="login">
+        <div className="Login">
             <h1>Login</h1>
             <form>
                 <input type="email" placeholder="Email" /><br />
