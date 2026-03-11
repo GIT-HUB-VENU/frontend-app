@@ -7,3 +7,8 @@
     background-color: rgb(172, 216, 216);
     color : rgb(86, 105, 128);
 }
+.products img{
+    width: 500px;
+    object-fit: cover;  
+    margin-bottom: 10px;
+}

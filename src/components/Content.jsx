@@ -30,7 +30,7 @@ function Content() {
         {products.map((product) => (
           <div className="products">
             <ul>
-              <li><img src={`${API_URL}/${product.image}`} alt={product.name} /></li>
+              <img src={`${API_URL}/${product.image}`} alt={product.name} />
               <li>Product : {product.name}</li>
               <li>Price : {product.price}</li>
               <li>Description : {product.desc}</li>
