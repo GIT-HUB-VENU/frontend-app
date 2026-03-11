@@ -14,10 +14,10 @@ function App() {
         <Header />
         <Routes>
           <Route index element={<Content />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/orders" element={<Orders />} />
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
+          <Route path="cart" element={<Cart />} />
+          <Route path="orders" element={<Orders />} />
         </Routes>
       </BrowserRouter>
       <Footer />
