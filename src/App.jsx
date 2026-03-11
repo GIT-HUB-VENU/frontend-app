@@ -5,15 +5,23 @@ import Login from "./components/Login.jsx";
 import Register from "./components/Register.jsx";
 import Cart from "./components/Cart.jsx";
 import Orders from "./components/Orders.jsx";
+import { BrowserRouter , Route ,Routes } from "react-router-dom"; 
 
 function App() {
   return (
     <div>
-      <Header />
+      <BrowserRouter>
+        <Header />
+        <Routes>
+          <Route index element={<Content />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/orders" element={<Orders />} />
+        </Routes>
+      </BrowserRouter>
+      <Footer />
 
-      <Content />
-
-      <Login />
 
       <Register />
 
