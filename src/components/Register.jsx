@@ -1,46 +1,47 @@
+import { Link } from "react-router-dom";
 import { useState } from "react";
-import { Link, Navigate } from "react-router-dom";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import axios from "axios";
 function Register() {
-    const [user, setUser] = useState({});
-    const API_URL = import.meta.env.VITE_API_URL;
-    const Navigate = useNavigate();
-    const handleSubmit = async (e) => {
-        const url = API_URL+"/auth/signup";
-        const response = await axios.post(url,user);
-        Navigate("/login")
-        // Handle registration logic here
-    };
-
-    return (
-        <div>
-            <h1>Register Page</h1>
-            <form onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    placeholder="Username"
-                    value={username}
-                    onChange={(e) => setUser({...user, name: e.target.value})}
-                /><br />
-                <input
-                    type="email"
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e) => setUser({...user, email: e.target.value})}
-                /><br />
-                <input
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setUser({...user, password: e.target.value})}
-                /><br />
-                <button type="submit">Register</button>
-                <Link to="/login">Already Have Account ? Login</Link>
-            </form>
-        </div>
-    );
+  const [user, setUser] = useState({});
+  const API_URL = import.meta.env.VITE_API_URL;
+  const Navigate = useNavigate();
+  const handleSubmit = async () => {
+    const url = API_URL + "/auth/signup";
+    const response = await axios.post(url, user);
+    Navigate("/login");
+  };
+  return (
+    <div>
+      <h2>Registration Page</h2>
+      <p>
+        <input
+          type="text"
+          onChange={(e) => setUser({ ...user, name: e.target.value })}
+          placeholder="Name"
+        />
+      </p>
+      <p>
+        <input
+          type="text"
+          onChange={(e) => setUser({ ...user, email: e.target.value })}
+          placeholder="Email"
+        />
+      </p>
+      <p>
+        <input
+          type="password"
+          onChange={(e) => setUser({ ...user, password: e.target.value })}
+          placeholder="Password"
+        />
+      </p>
+      <p>
+        <button onClick={handleSubmit}>Submit</button>
+      </p>
+      <p>
+        <Link to="/login">Already a member? Login here</Link>
+      </p>
+    </div>
+  );
 }
-
 export default Register;
