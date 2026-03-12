@@ -2,19 +2,26 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+
 function Register() {
   const [user, setUser] = useState({});
   const API_URL = import.meta.env.VITE_API_URL;
   const Navigate = useNavigate();
+
   const handleSubmit = async () => {
     console.log(user);
+
     const url = API_URL + "/auth/signup";
-    const response = await axios.post("https://backend-app-2-lfsh.onrender.com/auth/signup", user);
+
+    const response = await axios.post(url, user);
+
     Navigate("/login");
   };
+
   return (
     <div>
       <h2>Registration Page</h2>
+
       <p>
         <input
           type="text"
@@ -22,6 +29,7 @@ function Register() {
           placeholder="Name"
         />
       </p>
+
       <p>
         <input
           type="text"
@@ -29,6 +37,7 @@ function Register() {
           placeholder="Email"
         />
       </p>
+
       <p>
         <input
           type="password"
@@ -36,13 +45,16 @@ function Register() {
           placeholder="Password"
         />
       </p>
+
       <p>
         <button onClick={handleSubmit}>Submit</button>
       </p>
+
       <p>
         <Link to="/login">Already a member? Login here</Link>
       </p>
     </div>
   );
 }
+
 export default Register;
