@@ -7,8 +7,9 @@ function Register() {
   const API_URL = import.meta.env.VITE_API_URL;
   const Navigate = useNavigate();
   const handleSubmit = async () => {
+    console.log(user);
     const url = API_URL + "/auth/signup";
-    const response = await axios.post(url, user);
+    const response = await axios.post("https://backend-app-2-lfsh.onrender.com/auth/signup", user);
     Navigate("/login");
   };
   return (
