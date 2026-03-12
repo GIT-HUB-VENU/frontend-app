@@ -6,9 +6,10 @@ import { useNavigate } from "react-router-dom";
 function Register() {
     const [user, setUser] = useState({});
     const API_URL = import.meta.env.VITE_API_URL;
+    const Navigate = useNavigate();
     const handleSubmit = async (e) => {
         const url = API_URL+"/auth/signup";
-        const user = await axios.post(API_URL,user);
+        const response = await axios.post(url,user);
         Navigate("/login")
         // Handle registration logic here
     };

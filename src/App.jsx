@@ -7,7 +7,13 @@ import Register from "./components/Register";
 import Cart from "./components/Cart";
 import Orders from "./components/Orders";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import {useState, createContext} from "react";
+import { useNavigate } from "react-router-dom";
+export const appContext = createContext();
 function App() {
+  const [user, setUser] = useState({});   
+  const API_URL = import.meta.env.VITE_API_URL;
+  const Navigate = useNavigate();
   return (
     <div>
       <BrowserRouter>
