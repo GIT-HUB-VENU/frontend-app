@@ -16,6 +16,7 @@ function App() {
   const Navigate = useNavigate();
   return (
     <div>
+      <appContext.Provider value={{user, setUser}}>
       <BrowserRouter>
         <Header />
         <Routes>
@@ -28,6 +29,7 @@ function App() {
         </Routes>
         <Footer />
       </BrowserRouter>
+      </appContext.Provider>
     </div>
   );
 }
