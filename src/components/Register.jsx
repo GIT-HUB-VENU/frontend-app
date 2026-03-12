@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 function Register() {
     const [user, setUser] = useState({});
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const API_URL = import.meta.env.VITE_API_URL;
+    const handleSubmit = async (e) => {
+        const url = API_URL+"/auth/login"
+        const user = await axios.post(API_URL,user);
         // Handle registration logic here
     };
 
