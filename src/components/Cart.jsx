@@ -1,5 +1,7 @@
 import { useContext, useState, useEffect } from "react";
 import { AppContext } from "../App";
+import axios from "axios";
+const API_URL = import.meta.env.VITE_API_URL;
 function Cart() {
   const { cart, setCart } = useContext(AppContext);
   const [orderValue, setOrderValue] = useState(0);
