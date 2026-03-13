@@ -42,12 +42,6 @@ function Content() {
     <div>
       <h3>Products Page</h3>
 
-      <button onClick={decrement}>-</button>
-      {count}
-      <button onClick={increment}>+</button>
-
-      <hr />
-
       {products.map((product) => (
         <div className="products" key={product._id}>
           <ul>
