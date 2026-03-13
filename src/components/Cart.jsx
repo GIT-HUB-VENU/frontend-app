@@ -39,17 +39,11 @@ function Cart() {
         quantity: item.quantity,
       }));
 
-      // Get userId from localStorage or context
-      const userId = localStorage.getItem("userId");
-      if (!userId) {
-        alert("You must be logged in to place an order.");
-        return;
-      }
-
+      // Send request with credentials (session cookie)
       const response = await axios.post(
         `${API_URL}/orders/place`,
-        { products, user: userId },
-        { withCredentials: true } // include cookies if using session auth
+        { products },
+        { withCredentials: true }
       );
 
       console.log("Order placed:", response.data);
@@ -57,7 +51,11 @@ function Cart() {
       setCart([]); // clear cart
     } catch (error) {
       console.error("Error placing order:", error);
-      alert("Failed to place order");
+      if (error.response && error.response.status === 401) {
+        alert("You must be logged in to place an order.");
+      } else {
+        alert("Failed to place order.");
+      }
     }
   };
 

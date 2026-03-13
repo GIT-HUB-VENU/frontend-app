@@ -1,23 +1,28 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 function Orders() {
   const [orders, setOrders] = useState([]);
-  const API_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     const fetchOrders = async () => {
       try {
         const response = await axios.get(`${API_URL}/orders`, {
-          withCredentials: true, // include cookies for session auth
+          withCredentials: true, // send session cookie
         });
         console.log("Orders response:", response.data);
         setOrders(Array.isArray(response.data) ? response.data : []);
       } catch (error) {
         console.error("Error fetching orders:", error);
+        if (error.response && error.response.status === 401) {
+          alert("You must be logged in to view orders.");
+        }
         setOrders([]);
       }
     };
+
     fetchOrders();
   }, []);
 
