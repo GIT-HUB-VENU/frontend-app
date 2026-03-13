@@ -32,13 +32,13 @@ function Orders() {
               <h3>Order Id: {order.orderDate}</h3>
               <ul>
                 {order.items.map((item) => (
-                <div key={item._id}>
-                  <li>Name : {item.name}</li>
-                  <li>Price : {item.price}</li>
-                  <li>Quantity : {item.quantity}</li>
-                  <li>Total : {item.price * item.quantity}</li>
-                  <br />
-                </div>
+                  <div key={item._id}>
+                    <li>Name : {item.name}</li>
+                    <li>Price : {item.price}</li>
+                    <li>Quantity : {item.quantity}</li>
+                    <li>Total : {item.price * item.quantity}</li>
+                    <br />
+                  </div>
                 ))}
               </ul>
               <h3>Order Value: {order.orderValue}</h3>
