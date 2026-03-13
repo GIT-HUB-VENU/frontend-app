@@ -33,6 +33,28 @@ function Cart() {
       }, 0),
     );
   }, [cart]);
+  const placeOrder = async () => {
+  try {
+    const products = cart.map((item) => ({
+      productId: item._id,   // map _id to productId
+      quantity: item.quantity,
+    }));
+
+    // Assuming you store userId in localStorage or context
+    const userId = localStorage.getItem("userId");
+
+    await axios.post(`${API_URL}/orders/place`, {
+      products,
+      user: userId,
+    });
+
+    alert("Order placed successfully!");
+    setCart([]); // clear cart
+  } catch (error) {
+    console.error("Error placing order:", error);
+    alert("Failed to place order");
+  }
+};
 
   return (
     <div>
@@ -52,7 +74,7 @@ function Cart() {
         <strong>Order Value:{orderValue}</strong>
       </p>
       <p>
-        <button>Place Order</button>
+        <button onClick={placeOrder}>Place Order</button>
       </p>
     </div>
   );
