@@ -1,62 +1,65 @@
 import { useContext, useState, useEffect } from "react";
 import { AppContext } from "../App";
 import axios from "axios";
+
 const API_URL = import.meta.env.VITE_API_URL;
+
 function Cart() {
   const { cart, setCart } = useContext(AppContext);
   const [orderValue, setOrderValue] = useState(0);
+
   const increment = (id) => {
     setCart(
-      cart.map((item) => {
-        if (item._id === id) {
-          return { ...item, quantity: item.quantity + 1 };
-        } else {
-          return item;
-        }
-      }),
+      cart.map((item) =>
+        item._id === id ? { ...item, quantity: item.quantity + 1 } : item
+      )
     );
   };
+
   const decrement = (id) => {
     setCart(
-      cart.map((item) => {
-        if (item._id === id && item.quantity > 0) {
-          return { ...item, quantity: item.quantity - 1 };
-        } else {
-          return item;
-        }
-      }),
+      cart.map((item) =>
+        item._id === id && item.quantity > 0
+          ? { ...item, quantity: item.quantity - 1 }
+          : item
+      )
     );
   };
 
   useEffect(() => {
     setOrderValue(
-      cart.reduce((sum, item) => {
-        return sum + item.quantity * item.price;
-      }, 0),
+      cart.reduce((sum, item) => sum + item.quantity * item.price, 0)
     );
   }, [cart]);
+
   const placeOrder = async () => {
-  try {
-    const products = cart.map((item) => ({
-      productId: item._id,   // map _id to productId
-      quantity: item.quantity,
-    }));
+    try {
+      const products = cart.map((item) => ({
+        productId: item._id,
+        quantity: item.quantity,
+      }));
 
-    // Assuming you store userId in localStorage or context
-    const userId = localStorage.getItem("userId");
+      // Get userId from localStorage or context
+      const userId = localStorage.getItem("userId");
+      if (!userId) {
+        alert("You must be logged in to place an order.");
+        return;
+      }
 
-    await axios.post(`${API_URL}/orders/place`, {
-      products,
-      user: userId,
-    });
+      const response = await axios.post(
+        `${API_URL}/orders/place`,
+        { products, user: userId },
+        { withCredentials: true } // include cookies if using session auth
+      );
 
-    alert("Order placed successfully!");
-    setCart([]); // clear cart
-  } catch (error) {
-    console.error("Error placing order:", error);
-    alert("Failed to place order");
-  }
-};
+      console.log("Order placed:", response.data);
+      alert("Order placed successfully!");
+      setCart([]); // clear cart
+    } catch (error) {
+      console.error("Error placing order:", error);
+      alert("Failed to place order");
+    }
+  };
 
   return (
     <div>
@@ -64,16 +67,16 @@ function Cart() {
       <ol>
         {cart.map((item) => (
           <li key={item._id}>
-            {item.name}-{item.price}-
+            {item.name} - ${item.price} - 
             <button onClick={() => decrement(item._id)}>-</button>
             {item.quantity}
-            <button onClick={() => increment(item._id)}>+</button>-
-            {item.quantity * item.price}
+            <button onClick={() => increment(item._id)}>+</button> -
+            ${item.quantity * item.price}
           </li>
         ))}
       </ol>
       <p>
-        <strong>Order Value:{orderValue}</strong>
+        <strong>Order Value: ${orderValue}</strong>
       </p>
       <p>
         <button onClick={placeOrder}>Place Order</button>
@@ -81,4 +84,5 @@ function Cart() {
     </div>
   );
 }
+
 export default Cart;
