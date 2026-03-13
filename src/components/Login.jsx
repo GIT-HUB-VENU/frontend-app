@@ -1,33 +1,52 @@
 import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AppContext } from "../App";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+
 function Login() {
-  const { user, setUser,cart } = useContext(AppContext);
+  const { user, setUser, cart } = useContext(AppContext);
   const API_URL = import.meta.env.VITE_API_URL;
-  const Navigate = useNavigate();
+  const navigate = useNavigate();
+  const location = useLocation(); // to check if redirected from cart
+  const [localUser, setLocalUser] = useState({ email: "", password: "" });
+
   const handleLogin = async () => {
-    const url = API_URL + "/auth/signin";
-    const response = await axios.post(url, user);
-    setUser(response.data);
-    if (cart.length > 0) Navigate("/cart");
-    else Navigate("/");
+    try {
+      const url = API_URL + "/auth/signin";
+      const response = await axios.post(url, localUser);
+      setUser(response.data);
+
+      // Navigate intelligently after login
+      if (location.state?.fromCart || cart.length > 0) {
+        navigate("/cart");
+      } else {
+        navigate("/");
+      }
+    } catch (error) {
+      console.error("Login failed:", error);
+      alert("Invalid credentials!");
+    }
   };
+
   return (
     <div>
       <h2>Login Page</h2>
       <p>
         <input
           type="text"
-          onChange={(e) => setUser({ ...user, email: e.target.value })}
+          value={localUser.email}
+          onChange={(e) => setLocalUser({ ...localUser, email: e.target.value })}
           placeholder="Email"
         />
       </p>
       <p>
         <input
           type="password"
-          onChange={(e) => setUser({ ...user, password: e.target.value })}
+          value={localUser.password}
+          onChange={(e) =>
+            setLocalUser({ ...localUser, password: e.target.value })
+          }
           placeholder="Password"
         />
       </p>
@@ -40,4 +59,5 @@ function Login() {
     </div>
   );
 }
+
 export default Login;
